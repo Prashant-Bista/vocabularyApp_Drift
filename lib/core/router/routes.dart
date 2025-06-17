@@ -1,8 +1,9 @@
 import 'package:go_router/go_router.dart';
-import 'package:vocabularyapp_drift/core/features/home/presentation/screens/add_vocabulary.dart';
-import 'package:vocabularyapp_drift/core/features/home/presentation/screens/vocabulary_home.dart';
 import 'package:vocabularyapp_drift/core/router/routeConstants.dart';
 import 'package:vocabularyapp_drift/core/router/routerConfig.dart';
+
+import '../../features/home/presentation/screens/add_vocabulary.dart';
+import '../../features/home/presentation/screens/vocabulary_home.dart';
 
 final routeController = RouteController();
 final appRoutes = GoRouter(

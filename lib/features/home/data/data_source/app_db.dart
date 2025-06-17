@@ -10,11 +10,10 @@ class VocabularyTable extends Table{
   BoolColumn get mastered => boolean().withDefault(const Constant(false))();
 
 }
-LazyDatabase _openConnection(){
-  return LazyDatabase((){
+ QueryExecutor _openConnection(){
     return driftDatabase(name: "my_database");
-  });
-}
+  }
+
 @DriftDatabase(tables:[VocabularyTable])
 class AppDb extends _$AppDb{
   AppDb(): super(_openConnection());

@@ -1,6 +1,6 @@
-import 'dart:math';
 
-import '../../../../locator/locator.dart';
+import 'package:vocabularyapp_drift/core/locator/locator.dart';
+
 import '../data_source/app_db.dart';
 
 
@@ -37,6 +37,7 @@ class VocabularyRepository{
       return await db.update(db.vocabularyTable).replace(vc);
     }
     catch(e){
+      print("yoyo");
       print(e.toString());
     }
   }
@@ -49,5 +50,4 @@ class VocabularyRepository{
       print(e.toString());
     }
   }
-
 }

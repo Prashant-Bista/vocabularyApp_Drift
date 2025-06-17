@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vocabularyapp_drift/core/features/home/presentation/screens/vocabulary_home.dart';
 import 'package:vocabularyapp_drift/core/locator/locator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vocabularyapp_drift/core/router/routes.dart';

@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../features/home/data/data_source/app_db.dart';
-import '../../features/home/data/repository/vocab_repo.dart';
+import '../../features/vocabulary/data/data_source/app_db.dart';
+import '../../features/vocabulary/data/repository/vocab_repo.dart';
 
 final vocabProvider = ChangeNotifierProvider.autoDispose<VocabularyProvider>((ref)=>VocabularyProvider());
 class VocabularyProvider extends ChangeNotifier{

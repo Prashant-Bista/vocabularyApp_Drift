@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vocabularyapp_drift/core/providers/vocabulary_provider.dart';
-import 'package:vocabularyapp_drift/features/home/data/data_source/app_db.dart';
+
+import '../../../../core/data_source/app_db.dart' ;
 
 class AddVocabulary extends ConsumerWidget {
   const AddVocabulary({super.key});
@@ -96,18 +97,14 @@ class AddVocabulary extends ConsumerWidget {
                   minWidth: 100.w,
                   onPressed: () {
                     if(addVocabKey.currentState!.validate()){
-                      VocabularyTableCompanion vtc = VocabularyTableCompanion(
-                        id: provider.isAdd?df.Value.absent():df.Value(provider.updateId),
-                          word: df.Value(provider.wordController.text),
-                        definition: df.Value(provider.definitionController.text),
-                        exampleSentence:  df.Value(provider.exampleController.text),
-                        mastered:  df.Value(provider.mastered)
+                      VocabularyTableCompanion vc = VocabularyTableCompanion(
+
                       );
                       if(provider.isAdd){
-                        provider.addVocabulary(vtc);
+                        provider.addVocabulary(vc);
                       }
                       else{
-                        provider.updateVocabulary(vtc);
+                        provider.updateVocabulary(vc);
                       }
                       Navigator.of(context).pop();
                     }

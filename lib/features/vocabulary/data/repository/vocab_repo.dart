@@ -26,7 +26,7 @@ class VocabularyRepository{
   }
   addVocabulary(VocabularyTableCompanion vc)async{
     try{
-      return await db.into(db.vocabularyTable).insert(vc);
+       await db.into(db.vocabularyTable).insert(vc);
     }
     catch(e){
       print(e.toString());
@@ -34,7 +34,7 @@ class VocabularyRepository{
   }
   updateVocabulary(VocabularyTableCompanion vc) async{
     try{
-      return await db.update(db.vocabularyTable).replace(vc);
+       await db.update(db.vocabularyTable).replace(vc);
     }
     catch(e){
       print("yoyo");
@@ -43,8 +43,8 @@ class VocabularyRepository{
   }
   deleteVocabulary(int id) async{
     try{
-      return await db.delete(db.vocabularyTable)..where((vocab)=>vocab.id.equals(id));
-
+      print("yoyo");
+      await (db.delete(db.vocabularyTable)..where((vocab)=>vocab.id.equals(id))).go();
     }
     catch(e){
       print(e.toString());

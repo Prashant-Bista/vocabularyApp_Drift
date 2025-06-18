@@ -17,7 +17,6 @@ class VocabularyCategory extends Table{
   TextColumn get category => text().unique()();
   DateTimeColumn get createdAt => dateTime().nullable().clientDefault(()=>DateTime.now())();
   DateTimeColumn get updatedAt => dateTime().nullable().withDefault(currentDateAndTime)();
-
 }
  QueryExecutor _openConnection(){
     return driftDatabase(name: "my_database");

@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 
-import '../../features/vocabulary/data/data_source/app_db.dart';
+import '../data_source/app_db.dart';
 
 
 GetIt locator =  GetIt.instance;

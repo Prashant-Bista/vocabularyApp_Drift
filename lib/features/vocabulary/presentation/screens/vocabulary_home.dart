@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vocabularyapp_drift/core/providers/category_provider.dart';
 import 'package:vocabularyapp_drift/core/providers/vocabulary_provider.dart';
 import 'package:vocabularyapp_drift/core/router/routes.dart';
 
-import '../../data/data_source/app_db.dart';
+import '../../../../core/data_source/app_db.dart';
 
 class VocabularyHome extends ConsumerWidget {
 
-   VocabularyHome({super.key});
+  VocabularyHome({super.key});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final provider = ref.watch(vocabProvider);
+    final catProvider = ref.watch(categoryProvider);
     List<VocabularyTableData> vocabs = provider.allVocabularies;
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +37,7 @@ class VocabularyHome extends ConsumerWidget {
           onTap: (){
             provider.toggleIsAdd(false);
             provider.setValuesForUpdate(index);
-            routeController.routeToAddVocabulary();
+            routeController.routeToVocabularyAdd();
           },
           leading: CircleAvatar(
             radius: 20.sp,
@@ -52,6 +54,8 @@ class VocabularyHome extends ConsumerWidget {
                 children: [
                   Text("Definition:",style: TextStyle(fontWeight: FontWeight.w600),),
                   Text("Example:",style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text("Category:",style: TextStyle(fontWeight: FontWeight.w600)),
+
                 ],
               ),
               SizedBox(width:15.w,),
@@ -61,6 +65,8 @@ class VocabularyHome extends ConsumerWidget {
                   children: [
                     Text(vocabs[index].definition,overflow: TextOverflow.ellipsis,),
                     Text(vocabs[index].exampleSentence??"",overflow: TextOverflow.ellipsis),
+                    Text(catProvider.allCagegories.where((each)=>vocabs[index].categoryId==each.id).first.category,overflow: TextOverflow.ellipsis),
+
                   ],
                 ),
               )
@@ -72,7 +78,7 @@ class VocabularyHome extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(child:Icon(Icons.add),onPressed: (){
         provider.toggleIsAdd(true);
         provider.initiateValuesForAdd();
-        routeController.routeToAddVocabulary();
+        routeController.routeToVocabularyAdd();
       }),
     );
   }

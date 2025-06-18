@@ -2,6 +2,7 @@ import 'package:drift/drift.dart' as df;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vocabularyapp_drift/core/providers/category_provider.dart';
 import 'package:vocabularyapp_drift/core/providers/vocabulary_provider.dart';
 
 import '../../../../core/data_source/app_db.dart' ;
@@ -14,7 +15,8 @@ class AddVocabulary extends ConsumerWidget {
     GlobalKey<FormState> addVocabKey = GlobalKey<FormState>();
 
     final provider = ref.watch(vocabProvider);
-    return Scaffold(
+    final catProvider = ref.watch(categoryProvider);
+    return catProvider.allCagegories.isEmpty?CircularProgressIndicator():Scaffold(
       appBar: AppBar(title: Text("Add vocabulary")),
       body: Form(
         key: addVocabKey,
@@ -92,12 +94,23 @@ class AddVocabulary extends ConsumerWidget {
                     })
                   ],
                 ),
+                DropdownButton(value:catProvider.selectedCategory,hint:Text("Category"),items: catProvider.allCagegories.map((each)=>DropdownMenuItem(value: each.category,child: Text(each.category))).toList(), onChanged: (value){
+                 catProvider.setSelectedCategory(value!);
+                  provider.selectedCatId = catProvider.allCagegories.where((each)=>each.category==value).first.id;
+                },),
                 MaterialButton(
                   height: 40.h,
                   minWidth: 100.w,
                   onPressed: () {
                     if(addVocabKey.currentState!.validate()){
                       VocabularyTableCompanion vc = VocabularyTableCompanion(
+                          word: df.Value(provider.wordController.text),
+                          definition: df.Value(provider.definitionController.text),
+                          exampleSentence:  df.Value(provider.exampleController.text),
+                          mastered:  df.Value(provider.mastered),
+                          categoryId:  df.Value(provider.selectedCatId),
+                          createdAt:  df.Value.absent(),
+                          updatedAt:  df.Value.absent()
 
                       );
                       if(provider.isAdd){
@@ -116,7 +129,7 @@ class AddVocabulary extends ConsumerWidget {
                   splashColor: Colors.blue,
                   child: Text("${provider.isAdd?"Add":"Update"}", style: TextStyle(color: Colors.white)),
                 ),
-              ],
+            ],
             ),
           ),
         ),

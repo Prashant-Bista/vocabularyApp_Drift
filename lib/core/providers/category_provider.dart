@@ -1,10 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vocabularyapp_drift/features/home/data/repository/category_repo.dart';
+import 'package:vocabularyapp_drift/core/repository/category_repo.dart';
 
-import '../../features/vocabulary/data/data_source/app_db.dart';
+import '../data_source/app_db.dart';
+
 final categoryProvider = ChangeNotifierProvider.autoDispose<CategoryProvider>((ref)=>CategoryProvider());
 class CategoryProvider extends ChangeNotifier{
+  CategoryProvider(){
+    getAllCategory();
+  }
+  bool isAdd = false;
+  bool isLoading = false;
+  int updateId=-1;
+  int categoryId=-1;
+  String? selectedCategory;
+  TextEditingController categoryController = TextEditingController();
 
   CategoryRepository _catrepo = CategoryRepository();
   List<VocabularyCategoryData> allCagegories =[];
@@ -27,5 +37,15 @@ class CategoryProvider extends ChangeNotifier{
     getAllCategory();
     notifyListeners();
   }
-
+  toggleIsAdd(bool au){
+    isAdd = au;
+    notifyListeners();
+  }
+  initiateValuesForAdd(){
+    categoryController.text =="";
+  }
+  setSelectedCategory(String value){
+    selectedCategory = value;
+    notifyListeners();
+  }
 }

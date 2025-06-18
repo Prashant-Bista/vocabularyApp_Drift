@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../features/vocabulary/data/data_source/app_db.dart';
-import '../../features/vocabulary/data/repository/vocab_repo.dart';
 
-final vocabProvider = ChangeNotifierProvider.autoDispose<VocabularyProvider>((ref)=>VocabularyProvider());
+import '../data_source/app_db.dart';
+import '../repository/vocab_repo.dart';
+
+final
+vocabProvider = ChangeNotifierProvider.autoDispose<VocabularyProvider>((ref)=>VocabularyProvider());
 class VocabularyProvider extends ChangeNotifier{
   VocabularyProvider(){
     getAllVocabularies();
@@ -13,9 +15,11 @@ class VocabularyProvider extends ChangeNotifier{
   bool isLoading = false;
   bool mastered = false;
   int updateId=-1;
+  int categoryId=-1;
   TextEditingController wordController = TextEditingController();
   TextEditingController definitionController = TextEditingController();
   TextEditingController exampleController = TextEditingController();
+  late int  selectedCatId;
 
   List<VocabularyTableData> _allVocabularies=[];
   List<VocabularyTableData> get allVocabularies =>_allVocabularies;

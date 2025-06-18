@@ -7,24 +7,45 @@ BuildContext? ctx;
 void addContext(BuildContext context) {
   ctx=  context;
 }
-routeToHomePage({bool shouldRemovePrevious=false, }){
+routeToVocabularyHomePage({bool shouldRemovePrevious=false, }){
   if(ctx!=null){
     if(shouldRemovePrevious){
-      ctx?.goNamed(RouteConstants.homePage);
+      ctx?.goNamed(RouteConstants.vocabHomePage);
     }
     else{
-      ctx?.pushNamed(RouteConstants.homePage);
+      ctx?.pushNamed(RouteConstants.vocabHomePage);
     }
   }
 }
-routeToAddVocabulary({bool shouldRemovePrevious=false}){
+routeToVocabularyAdd({bool shouldRemovePrevious=false}){
   if(ctx!=null){
     if(shouldRemovePrevious){
-      ctx?.goNamed(RouteConstants.addPage);
+      ctx?.goNamed(RouteConstants.vocabAddPage);
     }
     else{
-      ctx?.pushNamed(RouteConstants.addPage);
+      ctx?.pushNamed(RouteConstants.vocabAddPage);
     }
   }
 }
+routeToCategoryHomePage({bool shouldRemovePrevious=false, }){
+  if(ctx!=null){
+    if(shouldRemovePrevious){
+      ctx?.goNamed(RouteConstants.catHomePage);
+    }
+    else{
+      ctx?.pushNamed(RouteConstants.catHomePage);
+    }
+  }
+}
+routeToCategoryAdd({bool shouldRemovePrevious=false}){
+  if(ctx!=null){
+    if(shouldRemovePrevious){
+      ctx?.goNamed(RouteConstants.catAddPage);
+    }
+    else{
+      ctx?.pushNamed(RouteConstants.catAddPage);
+    }
+  }
+}
+
 }
